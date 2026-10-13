@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Nesla MS – Full Stack Developer portfolio">
+<title>Nesla MS Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=DM+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: soft physical surfaces. Raised panels, pressable keys, one amber "signal" accent like an indicator light. */
+:root{
+  --bg:#e6e9ef; --surface:#eceff4; --ink:#1d2433; --muted:#5d6678;
+  --hi:#ffffff; --lo:#c3c9d5; --accent:#e8892b; --accent-ink:#2a1606; --ok:#2f9e6b; --line:#d3d8e1;
+  --display:"Bricolage Grotesque",ui-sans-serif,system-ui,sans-serif;
+  --body:"DM Sans",ui-sans-serif,system-ui,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+  --r:22px;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#1b1f27; --surface:#20252e; --ink:#e7eaf0; --muted:#9aa3b4;
+  --hi:#2a303b; --lo:#12151b; --accent:#f39a3f; --accent-ink:#2a1606; --ok:#4cc38a; --line:#2d333e; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#1b1f27; --surface:#20252e; --ink:#e7eaf0; --muted:#9aa3b4;
+  --hi:#2a303b; --lo:#12151b; --accent:#f39a3f; --accent-ink:#2a1606; --ok:#4cc38a; --line:#2d333e; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.6;padding-inline:clamp(16px,4vw,40px);padding-block:0 48px}
+.wrap{max-width:1080px;margin:0 auto;display:grid;gap:clamp(56px,8vw,96px)}
+h1,h2,h3{font-family:var(--display);line-height:1.1;text-wrap:balance;margin:0}
+p{margin:0}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+
+/* tactile primitives */
+.raised{background:var(--surface);border-radius:var(--r);box-shadow:8px 8px 18px var(--lo),-8px -8px 18px var(--hi)}
+.inset{background:var(--bg);border-radius:14px;box-shadow:inset 4px 4px 9px var(--lo),inset -4px -4px 9px var(--hi)}
+.key{appearance:none;border:0;cursor:pointer;font:600 15px var(--body);color:var(--ink);background:var(--surface);
+  padding:12px 20px;border-radius:14px;box-shadow:5px 5px 11px var(--lo),-5px -5px 11px var(--hi);
+  transition:box-shadow .15s,transform .15s;text-decoration:none;display:inline-flex;align-items:center;gap:8px}
+.key:hover{transform:translateY(-1px)}
+.key:active,.key[aria-pressed="true"],.key[aria-selected="true"]{transform:translateY(1px);box-shadow:inset 3px 3px 7px var(--lo),inset -3px -3px 7px var(--hi)}
+.key.primary{background:var(--accent);color:var(--accent-ink);box-shadow:5px 5px 12px var(--lo),-5px -5px 12px var(--hi),inset 0 -3px 0 rgba(0,0,0,.14)}
+.key.primary:active{box-shadow:inset 3px 3px 8px rgba(0,0,0,.25)}
+.label{font:600 12px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.led{width:9px;height:9px;border-radius:50%;background:var(--ok);box-shadow:0 0 0 3px color-mix(in srgb,var(--ok) 22%,transparent),0 0 10px var(--ok);display:inline-block}
+
+/* nav */
+nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;padding-block:14px;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(8px)}
+nav .bar{max-width:1080px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.mark{font:800 18px var(--display);display:flex;align-items:center;gap:10px}
+.mark span{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;background:var(--accent);color:var(--accent-ink);font-size:15px;box-shadow:inset 0 -3px 0 rgba(0,0,0,.15)}
+nav ul{list-style:none;display:flex;gap:6px;margin:0;padding:6px;flex-wrap:wrap}
+nav ul a{display:block;padding:7px 14px;border-radius:10px;text-decoration:none;font-weight:500;font-size:14px;color:var(--muted)}
+nav ul a:hover{color:var(--ink);background:var(--surface)}
+
+/* hero */
+.hero{display:grid;grid-template-columns:1.35fr 1fr;gap:28px;align-items:stretch;padding-top:24px}
+.hero .intro{padding:clamp(24px,4vw,44px);display:grid;gap:22px;align-content:start;min-width:0}
+.status{display:inline-flex;align-items:center;gap:10px;padding:8px 14px;font-size:14px;width:fit-content}
+.hero h1{font-size:clamp(40px,7vw,76px);font-weight:800;letter-spacing:-.025em}
+.hero h1 em{font-style:normal;color:var(--accent)}
+.hero .lede{font-size:clamp(17px,2vw,19px);color:var(--muted);max-width:52ch}
+.actions{display:flex;gap:14px;flex-wrap:wrap}
+.panel{padding:24px;display:grid;gap:14px;align-content:start;min-width:0}
+.readout{padding:16px 18px;display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.readout b{font:700 30px var(--display);font-variant-numeric:tabular-nums}
+.readout small{font-size:13px;color:var(--muted);text-align:right}
+
+/* section head */
+.sec-head{display:flex;justify-content:space-between;align-items:end;gap:16px;flex-wrap:wrap;margin-bottom:28px}
+.sec-head h2{font-size:clamp(30px,4.5vw,46px);font-weight:700;letter-spacing:-.02em}
+.sec-head p{color:var(--muted);max-width:44ch}
+
+/* about + skills */
+.about{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+.about .card{padding:clamp(22px,3vw,32px);display:grid;gap:16px;align-content:start;min-width:0}
+.about .card p{color:var(--muted)}
+.chips{display:flex;flex-wrap:wrap;gap:10px}
+.chip{padding:8px 14px;font-size:14px;font-weight:500;border-radius:12px;background:var(--surface);box-shadow:3px 3px 7px var(--lo),-3px -3px 7px var(--hi)}
+.group{display:grid;gap:10px}
+
+/* projects */
+.tabs{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:24px}
+.tabs .key{font-family:var(--mono);font-size:13px;letter-spacing:.06em}
+.project{padding:clamp(22px,4vw,40px);display:grid;grid-template-columns:1fr 1.25fr;gap:clamp(22px,4vw,44px)}
+.project .meta{display:grid;gap:16px;align-content:start;min-width:0}
+.project h3{font-size:clamp(32px,5vw,52px);font-weight:800;letter-spacing:-.02em}
+.project .sub{font-weight:600;color:var(--ink)}
+.project .desc{color:var(--muted)}
+.feat{list-style:none;margin:0;padding:0;display:grid;gap:12px;min-width:0}
+.feat li{padding:14px 16px 14px 44px;position:relative;font-size:15px}
+.feat li::before{content:"";position:absolute;left:18px;top:21px;width:10px;height:10px;border-radius:3px;background:var(--accent);box-shadow:inset 0 -2px 0 rgba(0,0,0,.18)}
+.tags{display:flex;gap:8px;flex-wrap:wrap}
+.tag{font:500 12px var(--mono);padding:5px 10px;border-radius:8px;border:1px solid var(--line);color:var(--muted)}
+
+/* experience */
+.xp{padding:clamp(22px,3vw,32px);display:grid;grid-template-columns:200px 1fr;gap:24px}
+.xp .when{font:600 14px var(--mono);color:var(--muted)}
+.xp h3{font-size:24px;margin-bottom:6px}
+.xp ul{margin:14px 0 0;padding-left:18px;color:var(--muted);display:grid;gap:6px}
+
+/* contact */
+.contact{padding:clamp(26px,5vw,52px);display:grid;grid-template-columns:1.1fr 1fr;gap:32px;align-items:center}
+.contact h2{font-size:clamp(32px,5vw,54px);font-weight:800;letter-spacing:-.02em}
+.contact p{color:var(--muted);margin-top:14px}
+.links{display:grid;gap:12px;min-width:0}
+.linkrow{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 12px 12px 18px;min-width:0}
+.linkrow .v{font-family:var(--mono);font-size:14px;overflow-wrap:anywhere;min-width:0}
+.linkrow .key{padding:8px 14px;font-size:13px;flex-shrink:0}
+footer{text-align:center;color:var(--muted);font-size:13px;font-family:var(--mono)}
+.note{font-size:13px;color:var(--muted);font-family:var(--mono)}
+
+@media (max-width:820px){
+  .hero,.about,.project,.contact{grid-template-columns:1fr}
+  .xp{grid-template-columns:1fr;gap:8px}
+  nav ul{display:none}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<nav>
+  <div class="bar">
+    <div class="mark"><span>NM</span>Nesla MS</div>
+    <ul class="inset">
+      <li><a href="#about">About</a></li>
+      <li><a href="#work">Work</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <button class="key" id="theme" type="button" aria-label="Toggle dark mode">◐ Theme</button>
+  </div>
+</nav>
+
+<main class="wrap">
+  <section class="hero">
+    <div class="intro raised">
+      <div class="status inset"><i class="led"></i> Open to new opportunities</div>
+      <span class="label">Nesla MS · Full Stack Developer · Kerala, India</span>
+      <h1>I build portals people <em>actually</em> finish using.</h1>
+      <p class="lede">Full stack developer at GNX Digital Solutions, Technopark. I build enterprise web apps for recruitment, compliance and branch operations with Next.js, React and Node, turning multi-step approval workflows into clear, responsive interfaces.</p>
+      <div class="actions">
+        <a class="key primary" href="#work">See my work →</a>
+        <a class="key" href="#contact">Get in touch</a>
+      </div>
+    </div>
+    <aside class="panel raised" aria-label="At a glance">
+      <span class="label">At a glance</span>
+      <div class="readout inset"><b>4</b><small>enterprise products shipped</small></div>
+      <div class="readout inset"><b>4</b><small>role-based portals: candidate, vendor, BGV, coordinator</small></div>
+      <div class="readout inset"><b>2</b><small>AI features: interview round and document validation</small></div>
+      <div class="readout inset"><b>2</b><small>years building for the web</small></div>
+    </aside>
+  </section>
+
+  <section id="about">
+    <div class="sec-head"><h2>About me</h2><p>What I work on and the tools I reach for.</p></div>
+    <div class="about">
+      <div class="card raised">
+        <span class="label">Background</span>
+        <p>I'm a full stack developer from Kerala with 2 years of hands-on experience, mostly on the front end. I build responsive, reliable web applications for HR, banking compliance and branch operations, and integrate them with scalable back-end services.</p>
+        <p>Most of my work involves role-based access, configurable approval chains, OTP-based portals and third-party integrations. I care about interfaces that stay simple even when the workflow behind them has five approval levels.</p>
+        <span class="label">Education</span>
+        <p><b style="color:var(--ink)">B.E. Computer Science &amp; Engineering</b><br>SSRE College, Coimbatore (Distance) · 2023 – 2026</p>
+        <p><b style="color:var(--ink)">Diploma in Computer Engineering</b><br>KKMMPTC Mala, Thrissur · 2018 – 2021</p>
+      </div>
+      <div class="card raised">
+        <div class="group"><span class="label">Frontend</span>
+          <div class="chips"><span class="chip">Next.js</span><span class="chip">React</span><span class="chip">TypeScript</span><span class="chip">JavaScript</span><span class="chip">HTML</span><span class="chip">CSS</span><span class="chip">Bootstrap</span></div></div>
+        <div class="group"><span class="label">Backend</span>
+          <div class="chips"><span class="chip">Node.js</span><span class="chip">Express.js</span><span class="chip">Nest.js</span></div></div>
+        <div class="group"><span class="label">Database</span>
+          <div class="chips"><span class="chip">PostgreSQL</span><span class="chip">MongoDB</span></div></div>
+        <div class="group"><span class="label">Deploy &amp; tools</span>
+          <div class="chips"><span class="chip">AWS</span><span class="chip">NGINX</span><span class="chip">Docker</span><span class="chip">Git</span><span class="chip">GitHub</span><span class="chip">Bitbucket</span><span class="chip">Postman</span><span class="chip">Jira</span></div></div>
+        <div class="group"><span class="label">Design</span>
+          <div class="chips"><span class="chip">Figma</span><span class="chip">Adobe XD</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="work">
+    <div class="sec-head"><h2>Selected work</h2><p>Press a project to see what I built.</p></div>
+    <div class="tabs" role="tablist" id="tabs"></div>
+    <article class="project raised" id="project" role="tabpanel" aria-live="polite"></article>
+  </section>
+
+  <section id="experience">
+    <div class="sec-head"><h2>Experience</h2></div>
+    <div style="display:grid;gap:24px">
+    <div class="xp raised">
+      <div class="when">Jan 2025 — Present</div>
+      <div>
+        <h3>Software Developer</h3>
+        <p class="note">GNX Digital Solutions · Technopark, Trivandrum</p>
+        <ul>
+          <li>Built responsive, user-centric front ends with Next.js and JavaScript, focused on performance, accessibility and cross-browser support.</li>
+          <li>Delivered the AURA HRMS, Talent Sourcing portals, ATLAS and the AML monitoring system.</li>
+          <li>Worked with back-end teams to integrate APIs and keep design and behaviour consistent across modules.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="xp raised">
+      <div class="when">Sep 2024 — Dec 2024</div>
+      <div>
+        <h3>Junior Full Stack Developer</h3>
+        <p class="note">Nibav Pvt Ltd · Chennai</p>
+        <ul>
+          <li>Developed and maintained full stack web applications, building responsive interfaces and integrating back-end APIs.</li>
+        </ul>
+      </div>
+    </div>
+    </div>
+  </section>
+
+  <section id="contact" class="contact raised">
+    <div>
+      <span class="label">Contact</span>
+      <h2>Let's build something useful.</h2>
+      <p>I'm open to developer roles and freelance projects. Reach out through any of these.</p>
+    </div>
+    <div class="links">
+      <div class="linkrow inset"><span class="v">nesla0524@gmail.com</span><button class="key" type="button" data-copy="nesla0524@gmail.com">Copy</button></div>
+      <div class="linkrow inset"><span class="v">linkedin.com/in/nesla-ms</span><a class="key" href="https://www.linkedin.com/in/nesla-ms-57298a23b" target="_blank" rel="noopener">Open</a></div>
+      <div class="linkrow inset"><span class="v">github.com/Nesla05</span><a class="key" href="https://github.com/Nesla05" target="_blank" rel="noopener">Open</a></div>
+    </div>
+  </section>
+
+  <footer>© 2026 Nesla MS · Trivandrum, Kerala</footer>
+</main>
+
+<script>
+const projects=[
+ {id:"aura",name:"AURA",sub:"Hiring & Recruitment Management System",
+  desc:"An HRMS that runs hiring end to end, from vacancy approval and campus drives to vendor sourcing, onboarding and HR operations.",
+  tags:["RBAC","Workflows","Integrations","Portals"],
+  feat:["Secure web app with role-based authentication, authorization and User & Role Management.",
+        "Recruitment modules for vacancies, job descriptions, budget allocation, approvals and third-party job posting.",
+        "Campus Recruitment Drives with college-specific drives, coordinator assignment and a Coordinator Portal.",
+        "End-to-end candidate workflow: sourcing, shortlisting, onboarding and document verification.",
+        "Vendor Management with separate portals for Recruitment and BGV vendors.",
+        "HR operations: employee transfers, retention management and payroll."]},
+ {id:"talent",name:"Talent Sourcing",sub:"Candidate, Vendor & Coordinator Portals",
+  desc:"The external-facing side of the HRMS, where candidates apply and track their progress and vendors and colleges manage pipelines.",
+  tags:["OTP Auth","AI Interview","AI Doc Parsing"],
+  feat:["Candidate Portal with registration and email-based OTP login.",
+        "Job listings from the HRMS with direct apply.",
+        "Full profile management: education, experience, skills, languages, certifications, career gaps.",
+        "Application tracking for shortlisting status and interview progress.",
+        "Interview flow with a WhatsApp first round, an AI-based second round and feedback.",
+        "Document upload with AI-powered parsing and validation."]},
+ {id:"atlas",name:"ATLAS",sub:"Autonomous Tenant Lease Agreement System",
+  desc:"A system for raising new branch requests, moving them through a configurable chain of approvers, and tracking the lease agreement behind each branch.",
+  tags:["Multi-level Approval","Configurable","Lease"],
+  feat:["Branch Request module to raise and track new branch proposals.",
+        "Multi-level approval workflow with approve and reject actions at each level.",
+        "Approval Configuration to define hierarchies and levels without code changes.",
+        "Lease agreement remarks captured and reviewed during approval."]},
+ {id:"aml",name:"AML",sub:"Anti-Money Laundering Monitoring System",
+  desc:"A compliance tool that flags suspicious activity on loan products and routes alerts through investigation and approval.",
+  tags:["Compliance","Dynamic Forms","Cron","Audit"],
+  feat:["Alert Management for products like Gold Loans with customer and loan details.",
+        "Multi-level investigation with approve and reject workflows.",
+        "Dynamic Product Configuration and Investigation Forms with full CRUD.",
+        "Scheduler Management using Cron expressions.",
+        "Audit and reporting with login logs and user activity tracking."]}
+];
+const tabs=document.getElementById("tabs"),panel=document.getElementById("project");
+function show(id){
+  const p=projects.find(x=>x.id===id);
+  tabs.querySelectorAll("button").forEach(b=>b.setAttribute("aria-selected",b.dataset.id===id));
+  panel.innerHTML=`<div class="meta"><span class="label">Project</span><h3>${p.name}</h3>
+    <p class="sub">${p.sub}</p><p class="desc">${p.desc}</p>
+    <div class="tags">${p.tags.map(t=>`<span class="tag">${t}</span>`).join("")}</div></div>
+    <ul class="feat">${p.feat.map(f=>`<li class="inset">${f}</li>`).join("")}</ul>`;
+}
+projects.forEach(p=>{const b=document.createElement("button");b.className="key";b.type="button";b.role="tab";
+  b.dataset.id=p.id;b.textContent=p.name.toUpperCase();b.onclick=()=>show(p.id);tabs.appendChild(b)});
+show("aura");
+
+document.getElementById("theme").onclick=()=>{
+  const r=document.documentElement,cur=r.dataset.theme||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");
+  r.dataset.theme=cur==="dark"?"light":"dark";
+};
+document.querySelectorAll("[data-copy]").forEach(b=>b.onclick=async()=>{
+  try{await navigator.clipboard.writeText(b.dataset.copy);b.textContent="Copied";}
+  catch(e){const s=getSelection(),rg=document.createRange();rg.selectNodeContents(b.previousElementSibling);s.removeAllRanges();s.addRange(rg);b.textContent="Selected";}
+  setTimeout(()=>b.textContent="Copy",1600);
+});
+</script>
+</body>
+</html>
